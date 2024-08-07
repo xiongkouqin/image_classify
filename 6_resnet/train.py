@@ -52,7 +52,7 @@ def main():
     val_num = len(val_dataset)
     val_dataloader = torch.utils.data.DataLoader(val_dataset, batch_size, shuffle=False, num_workers=num_workers)
     
-    print(f'using {train_num} images for training, {val_num} iamges for validation') 
+    print(f'using {train_num} images for training, {val_num} images for validation') 
     
     net = resnet34()
     model_weight_path = '/home/xiongkouqin/projects/image_classify/6_resnet/resnet34-pretrain.pth'

@@ -1,4 +1,3 @@
-import torchvision.models.mobilenetv2  # where to find the url for pretrained weight 
 import torch 
 import torch.utils
 import torch.utils.data
@@ -6,7 +5,7 @@ import torchvision.transforms as tf
 import os
 import torchvision.datasets as datasets
 import json
-from model import MobileNetV2
+from model_v3 import mobile_net_v3_large
 import torch.nn as nn
 from tqdm import tqdm
 
@@ -54,8 +53,8 @@ def main():
     
     print(f'using {train_num} images for training, {val_num} images for validation') 
     
-    net = MobileNetV2(num_classes=5)
-    model_weight_path = '/home/xiongkouqin/projects/image_classify/7_mobilenet/mobilenet_v2-b0353104.pth'
+    net = mobile_net_v3_large(num_classes=5)
+    model_weight_path = '/home/xiongkouqin/projects/image_classify/7_mobilenet/mobilenet_v3_large-8738ca79.pth'
     pre_weights = torch.load(model_weight_path)
     # delete the classifier weights
     pre_dict = {k:v for k, v in pre_weights.items() if 'classifier' not in k}
@@ -72,7 +71,7 @@ def main():
     optimizer =  torch.optim.Adam(net.parameters(), lr=0.001)
     
     num_epochs = 10
-    save_path = os.path.join(project_root, 'mobilenetv2.pth')
+    save_path = os.path.join(project_root, 'mobilenetv3_large.pth')
     best_acc = 0.0
     train_steps = len(train_loader) # for each epoch, how mnay batches are there
     
